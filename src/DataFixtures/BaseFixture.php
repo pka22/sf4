@@ -6,6 +6,8 @@ namespace App\DataFixtures;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+
 
 abstract class BaseFixture extends Fixture
 {
@@ -39,10 +41,10 @@ protected function createMany(int $count,callable $factory)
         //la $factory doit retourner l'entité créée
         $entity = $factory($i);
         if($entity === null){
-            throw new \LogicException('Tu as oblié de retourner l\');
+            throw new \LogicException('Tu as oblié de retourner ');
             
         }
-        //Avertir Doctrine pour l'enregistrement de l'entité'
+        
             $this->manager->persist($entity);
     }
 }

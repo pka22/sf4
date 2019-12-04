@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Artist;
+use App\Repository\ArtistRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,9 +15,9 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(EntityManagerInterface $em)
+    /*public function index(EntityManagerInterface $em)
     {
-
+*/
         //Lancer une exception
 
        /* throw new \Exception('Je suis une erreur');*/
@@ -37,7 +38,7 @@ class HomeController extends AbstractController
             //return $this->render('index.html.twig');
         /*création d'une nouvelle instance d'artiste*/
 
-        $artist = (new Artist())
+        /*$artist = (new Artist())
                 ->setName('Komala')
                 ->setDescription('pas un vrai artist...');
         //Insert/update
@@ -49,5 +50,12 @@ class HomeController extends AbstractController
 
         return $this->render('index.html.twig');
 
-    }
+    }*/
+        public function index(ArtistRepository $artistRepository)
+        {
+            $resultats = $artistRepository->findDjs();
+            /*findBy([],['name' =>'Asc']);*/
+            dd($resultats);
+            return $this->render('index.html.twig');
+        }
 }
